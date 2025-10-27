@@ -1,16 +1,34 @@
 {
-  "name": "Chrome Extension Webpack",
-  "options_page": "options.html",
-  "background": {
-    "page": "background.html"
-  },
-  "browser_action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon-34.png"
-  },
+  "name": "My Local Extension Webpack",
+  "description": "A simple Chrome extension using Webpack and local files.",
+  "version": "1.0.0",
   "icons": {
-    "128": "icon-128.png"
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
   },
-  "manifest_version": 2,
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  "manifest_version": 3,
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/toggle-dark-theme.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_script": ["js/options.js"],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*"],
+      "matches": ["<all_urls>"]
+    },
+    {
+      "resources": ["styles/*"],
+      "matches": ["<all_urls>"]
+    },
+    {
+      "resources": ["html/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
